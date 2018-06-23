@@ -5,7 +5,7 @@ import traceback
 
 async def root_handled(request):
     try:
-        await root(request)
+        return await root(request)
     except:
         traceback.print_exc()
         return web.Response(body=traceback.format_exc())
@@ -38,10 +38,10 @@ async def root(request):
 
     return web.Response(body=body, content_type="image/png")
 
-async def run_app():
+async def app():
     app = web.Application()
-    app.router.add_get("/", root_handled
+    app.router.add_get("/", root_handled)
     return app
 
 if __name__ == "__main__":
-    web.run_app(run_app())
+    web.run_app(app())
